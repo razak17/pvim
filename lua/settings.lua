@@ -38,7 +38,7 @@ local default_options = {
 	concealcursor = "niv",
 	linebreak = true,
 	synmaxcol = 1024,
-	-- signcolumn = "yes:2",
+	signcolumn = "yes:2",
 	ruler = false,
 	cmdheight = 2,
 	cmdwinheight = 5,
@@ -160,6 +160,7 @@ local default_options = {
 	-- title
 	title = true,
 	titlelen = 70,
+	-- titlestring = " ❐ %t %r %m",
 	titlestring = "%<%F%=%l/%L - nvim",
 }
 
