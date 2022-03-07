@@ -6,7 +6,7 @@ set foldlevelstart=20
 set foldmethod=expr
 set foldexpr=utils#list_folds()
 set foldtext=utils#simple_fold_text()
-set fillchars=fold:\ set hidden
+set hidden
 
 " title required for i3 status checking, modified indicator at end
 "set titlestring=%t%(\ \(%F\)%)%a\ -\ VIM%(\ %M%)

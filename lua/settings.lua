@@ -9,6 +9,12 @@ local default_options = {
 	-- directory = rvim.get_cache_dir() .. "/swap",
 	-- viewdir = rvim.get_cache_dir() .. "/view",
 
+	-- Timing
+	timeout = true,
+	timeoutlen = 250,
+	ttimeoutlen = 10,
+	updatetime = 100,
+
 	-- Splits and buffers
 	splitbelow = true,
 	splitright = true,

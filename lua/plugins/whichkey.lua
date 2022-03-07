@@ -79,6 +79,26 @@ local opts = {
 }
 
 local mappings = {
+	A = {
+		name = "ASCII",
+		A = "add 20 less than signs",
+		b = "term",
+		B = "bfraktur",
+		e = "emboss",
+		E = "emboss2",
+		f = "bigascii12",
+		F = "letter",
+		m = "bigmono12",
+		v = "asciidoc-view",
+		w = "wideterm",
+	},
+	B = {
+		name = "+Background",
+		a = "show all open buffers",
+		d = "dark",
+		l = "light",
+	},
+	["↵"] = "execute commnd",
 	["b"] = {
 		"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 		"Buffers",
