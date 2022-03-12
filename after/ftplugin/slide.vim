@@ -1,6 +1,5 @@
 syntax on
 filetype off
-
 hi CursorLineNr cterm=bold
 
 set foldtext=SimpleFoldText()
@@ -28,22 +27,6 @@ function! ListFolds()
   endif
   return "0"
 endfunction
-
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-
-" presentation mode
-noremap <Left> :silent bp<CR> :redraw!<CR>
-noremap <Right> :silent bn<CR> :redraw!<CR>
-nmap <F5> :set relativenumber! number! nocursorline ruler!<CR>
-nmap <F2> :call utils#display_presentation_boundaries()<CR>
-nmap <F3> :call utils#find_execute_command()<CR>
 
 " background
 nnoremap <leader>Bl :highlight Normal guibg=#c3eeff guifg=#030303<CR>

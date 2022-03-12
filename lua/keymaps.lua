@@ -39,3 +39,21 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 keymap("n", "<C-z>", ":undo<CR>", opts)
 keymap("i", "<C-z>", ":undo<CR><Esc>", opts)
 keymap("x", "<C-z>", ":undo<CR><Esc>", opts)
+
+-- Disable arrows in normal mode
+keymap("n", "<Up>", "<NOP>", opts)
+keymap("i", "<Up>", "<NOP>", opts)
+keymap("n", "<Down>", "<NOP>", opts)
+keymap("i", "<Down>", "<NOP>", opts)
+keymap("i", "<Left>", "<NOP>", opts)
+keymap("i", "<Right>", "<NOP>", opts)
+
+keymap("n", "<CR>", "o<Esc>", opts)
+keymap("n", "<S-Enter>", "O<Esc>", opts)
+
+keymap("n", "<Left>", ":silent bp<CR> :redraw!<CR>", { noremap = true })
+keymap("n", "<Right>", ":silent bn<CR> :redraw!<CR>", { noremap = true })
+
+keymap("n", "<F5>", ":set relativenumber! number! nocursorline ruler!<CR>")
+keymap("n", "<F2>", ":call utils#display_presentation_boundaries()<CR>")
+keymap("n", "<F3>", ":call utils#find_execute_command()<CR>")

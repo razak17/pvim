@@ -106,6 +106,7 @@ local mappings = {
 	f = {
 		name = "+Telescope",
 		g = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+		w = { "<cmd>Telescope grep_string theme=ivy<cr>", "Find Text" },
 	},
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
