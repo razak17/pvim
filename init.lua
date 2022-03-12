@@ -8,6 +8,7 @@ end
 require("globals")
 require("bootstrap")
 require("settings")
+require("keymaps")
 require("highlights")
 require("plugins")
 require("plugins.telescope")
