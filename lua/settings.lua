@@ -168,6 +168,15 @@ local default_options = {
 	titlelen = 70,
 	-- titlestring = " ❐ %t %r %m",
 	titlestring = "%<%F%=%l/%L - nvim",
+
+	-- slide
+	autoread = true,
+	autowrite = true,
+	number = true,
+	relativenumber = true,
+	foldlevelstart = 20,
+	foldmethod = "expr",
+	hidden = true,
 }
 
 ---  SETTINGS  ---
@@ -186,7 +195,7 @@ local command_options = {
 	secure = true,
 	magic = true,
 	noerrorbells = true,
-	t_Co = 256,
+	t_Co = 16,
 	shell = "/bin/zsh",
 }
 

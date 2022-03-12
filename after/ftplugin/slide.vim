@@ -1,20 +1,13 @@
-set autoread
-set autowrite
-set nonumber
-set norelativenumber
-set foldlevelstart=20
-set foldmethod=expr
 set foldexpr=utils#list_folds()
 set foldtext=utils#simple_fold_text()
-set hidden
 
 " title required for i3 status checking, modified indicator at end
 "set titlestring=%t%(\ \(%F\)%)%a\ -\ VIM%(\ %M%)
-set titlestring=%(%F%)%a\ -\ VIM%(\ %M%)
-set t_Co=16
+" set titlestring=%(%F%)%a\ -\ VIM%(\ %M%)
+" set t_Co=16
 " undo cursorlinenr underline (was introduced Aug '19)
+
 hi CursorLineNr cterm=bold
-hi SignColumn guifg=#ffff00
 
 syntax on
 filetype off
