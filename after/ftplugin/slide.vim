@@ -1,16 +1,33 @@
-set foldexpr=utils#list_folds()
-set foldtext=utils#simple_fold_text()
-
-" title required for i3 status checking, modified indicator at end
-"set titlestring=%t%(\ \(%F\)%)%a\ -\ VIM%(\ %M%)
-" set titlestring=%(%F%)%a\ -\ VIM%(\ %M%)
-" set t_Co=16
-" undo cursorlinenr underline (was introduced Aug '19)
+syntax on
+filetype off
 
 hi CursorLineNr cterm=bold
 
-syntax on
-filetype off
+set foldtext=SimpleFoldText()
+
+function SimpleFoldText()
+  let line = getline(v:foldstart)
+  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+  return sub . ' >>>>>>'
+endfunction
+
+set foldexpr=ListFolds()
+
+function! ListFolds()
+  let thisline = getline(v:lnum)
+  if match(thisline, '^- ') >= 0
+    return ">1"
+  elseif match(thisline, '^  - ') >= 0
+    return ">2"
+  elseif match(thisline, '^    - ') >= 0
+    return ">3"
+  elseif match(thisline, '^      - ') >= 0
+    return ">4"
+  elseif match(thisline, '^        - ') >= 0
+    return ">5"
+  endif
+  return "0"
+endfunction
 
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
