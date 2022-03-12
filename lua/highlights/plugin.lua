@@ -7,6 +7,7 @@ return {
 	SignColumn = { fg = P.fg, bg = P.bg },
 	FoldColumn = { fg = P.fg_alt, bg = P.black },
 	VertSplit = { fg = P.darker_blue, bg = P.bg },
+	LineNr = { fg = P.base5, bg = P.none },
 
 	TelescopeNormal = { fg = P.fg },
 	TelescopeBorder = { fg = P.blue, bg = P.bg },

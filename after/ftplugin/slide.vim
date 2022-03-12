@@ -3,14 +3,53 @@ filetype off
 hi CursorLineNr cterm=bold
 
 set foldtext=SimpleFoldText()
+set foldexpr=ListFolds()
 
-function SimpleFoldText()
-  let line = getline(v:foldstart)
-  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
-  return sub . ' >>>>>>'
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
+
+
+" search highlighting color
+highlight Search ctermfg=grey ctermbg=red
+
+" toggles the paste mode
+" nmap <C-p> :set paste!<CR>
+
+" execute command
+nmap <leader><Enter> !!zsh<CR>
+
+" presentation mode
+nmap <F2> :call DisplayPresentationBoundaries()<CR>
+nmap <F3> :call FindExecuteCommand()<CR>
+
+" jump to slides
+nmap <F9> :call JumpFirstBuffer()<CR> :redraw!<CR>
+nmap <F10> :call JumpSecondToLastBuffer()<CR> :redraw!<CR>
+nmap <F11> :call JumpLastBuffer()<CR> :redraw!<CR>
+
+
+" ----------------------------------------------------------------- "
+" -------------------------- Functions ---------------------------- "
+" ----------------------------------------------------------------- "
+
+function! JumpFirstBuffer()
+  execute "buffer 1"
 endfunction
 
-set foldexpr=ListFolds()
+function! JumpSecondToLastBuffer()
+  execute "buffer " . (len(Buffers()) - 1)
+endfunction
+
+function! JumpLastBuffer()
+  execute "buffer " . len(Buffers())
+endfunction
+
+function! Buffers()
+  let l:buffers = filter(range(1, bufnr('$')), 'bufexists(v:val)')
+  return l:buffers
+endfunction
 
 function! ListFolds()
   let thisline = getline(v:lnum)
@@ -28,42 +67,32 @@ function! ListFolds()
   return "0"
 endfunction
 
-" background
-nnoremap <leader>Bl :highlight Normal guibg=#c3eeff guifg=#030303<CR>
-nnoremap <leader>Bd :highlight Normal guibg=#282a36 guifg=default<CR>
+function SimpleFoldText()
+  let line = getline(v:foldstart)
+  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+  return sub . ' >>>>>>'
+endfunction
 
-" shows all open buffers and their status
-nmap <leader>ba :ls<CR>
+let g:presentationBoundsDisplayed = 0
+function! DisplayPresentationBoundaries()
+  if g:presentationBoundsDisplayed
+    match
+    set colorcolumn=0
+    let g:presentationBoundsDisplayed = 0
+  else
+    highlight lastoflines ctermbg=darkred guibg=darkred
+    match lastoflines /\%23l/
+    set colorcolumn=80
+    let g:presentationBoundsDisplayed = 1
+  endif
+endfunction
 
-" toggles the paste mode
-" nmap <C-p> :set paste!<CR>
-
-" toggles word wrap
-nmap <C-w> :set wrap! linebreak<CR>
-
-" toggles spell checking
-nmap <C-]> :set spell! spelllang=en_us<CR>
-
-" execute command
-nmap <leader><Enter> !!zsh<CR>
-
-" AsciiDoc preview
-nmap <leader>Av :!asciidoc-view %<CR><CR>
-
-" adds a line of <
-nmap <leader>AA :normal 20i<<CR>
-
-" makes Ascii art font
-nmap <leader>Ab :.!toilet -w 200 -f term -F border<CR>
-nmap <leader>AB :.!toilet -w 200 -f bfraktur<CR>
-nmap <leader>Ae :.!toilet -w 200 -f emboss<CR>
-nmap <leader>AE :.!toilet -w 200 -f emboss2<CR>
-nmap <leader>Af :.!toilet -w 200 -f bigascii12<CR>
-nmap <leader>AF :.!toilet -w 200 -f letter<CR>
-nmap <leader>Am :.!toilet -w 200 -f bigmono12<CR>
-nmap <leader>Aw :.!toilet -w 200 -f wideterm<CR>
-
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q"
+function! FindExecuteCommand()
+  let line = search('\S*!'.'!:.*')
+  if line > 0
+    let command = substitute(getline(line), "\S*!"."!:*", "", "")
+    execute "silent !". command
+    execute "normal gg0"
+    redraw
+  endif
+endfunction
