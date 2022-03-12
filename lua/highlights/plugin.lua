@@ -8,6 +8,8 @@ return {
 	FoldColumn = { fg = P.fg_alt, bg = P.black },
 	VertSplit = { fg = P.darker_blue, bg = P.bg },
 	LineNr = { fg = P.base5, bg = P.none },
+  IncSearch = { fg = P.bg, bg = P.error_red, style = P.none },
+  Search = { fg = P.bg, bg = P.error_red },
 
 	TelescopeNormal = { fg = P.fg },
 	TelescopeBorder = { fg = P.blue, bg = P.bg },

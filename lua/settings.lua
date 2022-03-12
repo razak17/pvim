@@ -172,8 +172,8 @@ local default_options = {
 	-- slide
 	autoread = true,
 	autowrite = true,
-	number = true,
-	relativenumber = true,
+	number = false,
+	relativenumber = false,
 	foldlevelstart = 20,
 	foldmethod = "expr",
 	hidden = true,

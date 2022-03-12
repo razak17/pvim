@@ -10,10 +10,6 @@ let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
 
-
-" search highlighting color
-highlight Search ctermfg=grey ctermbg=red
-
 " toggles the paste mode
 " nmap <C-p> :set paste!<CR>
 
