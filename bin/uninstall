@@ -3,8 +3,11 @@
 PVIM_CONFIG_DIR="${PVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/pvim"}"
 
 removeconfig () {
-  rm -r "$PVIM_CONFIG_DIR/bin/pvim"
-  rm "$HOME/.local/bin/pvim"
+  if [ ! -d "$PVIM_CONFIG_DIR" ]; then
+    echo "pVim config directory not found: $PVIM_CONFIG_DIR" && exit
+  fi
+  rm -r "$PVIM_CONFIG_DIR"
+  [ -e "$HOME/.local/bin/pvim" ] && rm "$HOME/.local/bin/pvim"
 	echo "pVim uninstalled"
   cd "$HOME" || exit
 }
