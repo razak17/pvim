@@ -6,8 +6,8 @@ removeconfig () {
   if [ ! -d "$PVIM_CONFIG_DIR" ]; then
     echo "pVim config directory not found: $PVIM_CONFIG_DIR" && exit
   fi
-  rm -r "$PVIM_CONFIG_DIR"
-  [ -e "$HOME/.local/bin/pvim" ] && rm "$HOME/.local/bin/pvim"
+  sudo rm -r "$PVIM_CONFIG_DIR"
+  [ -e "$HOME/.local/bin/pvim" ] && sudo rm "$HOME/.local/bin/pvim"
 	echo "pVim uninstalled"
   cd "$HOME" || exit
 }
