@@ -49,13 +49,31 @@ return packer.startup(function(use)
 	use("folke/which-key.nvim")
 	use("razak17/zephyr-nvim")
 	use("xiyaowong/accelerated-jk.nvim")
+	use("nvim-telescope/telescope.nvim")
+	use({ "nvim-neo-tree/neo-tree.nvim", branch = "v2.x" })
+	use("MunifTanjim/nui.nvim")
+	use({
+		"s1n7ax/nvim-window-picker",
+		tag = "v1.*",
+		config = function()
+			require("window-picker").setup({
+				autoselect_one = true,
+				include_current = false,
+				filter_rules = {
+					bo = {
+						filetype = { "neo-tree-popup", "quickfix", "incline" },
+						buftype = { "terminal", "quickfix", "nofile" },
+					},
+				},
+			})
+		end,
+	})
 	use({
 		"romainl/vim-cool",
 		config = function()
 			vim.g.CoolTotalMatches = 1
 		end,
 	})
-	use("nvim-telescope/telescope.nvim")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
