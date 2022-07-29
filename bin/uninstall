@@ -1,0 +1,11 @@
+#!/bin/sh
+
+PVIM_CONFIG_DIR="${PVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/pvim"}"
+
+removeconfig () {
+  rm -r "$PVIM_CONFIG_DIR/bin/pvim"
+  rm "$HOME/.local/bin/pvim"
+	echo "pVim uninstalled"
+}
+
+removeconfig
