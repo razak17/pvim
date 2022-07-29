@@ -6,5 +6,5 @@ Personal config for presentations and notes in neovim
 Command to install
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/razak17/pvim/utils/bin/install) --all
+bash <(curl -s https://raw.githubusercontent.com/razak17/pvim/main/bin/install) --all
 ```
