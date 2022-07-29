@@ -10,7 +10,7 @@ _G.pvim = {
 ---Get the full path to `$RVIM_RUNTIME_DIR`
 ---@return string
 function pvim.get_runtime_dir()
-	local rvim_runtime_dir = os.getenv("RVIM_RUNTIME_DIR")
+	local rvim_runtime_dir = os.getenv("PVIM_RUNTIME_DIR")
 	if not rvim_runtime_dir then
 		-- when nvim is used directly
 		return vim.fn.stdpath("data")
@@ -21,13 +21,17 @@ end
 ---Get the full path to `$RVIM_CONFIG_DIR`
 ---@return string
 function pvim.get_config_dir()
-	return "~/.config/pvim"
+	local rvim_config_dir = vim.env.PVIM_CONFIG_DIR
+	if not rvim_config_dir then
+		return "~/.config/pvim"
+	end
+	return rvim_config_dir
 end
 
 ---Get the full path to `$RVIM_CACHE_DIR`
 ---@return string
 function pvim.get_cache_dir()
-	local rvim_cache_dir = os.getenv("RVIM_CACHE_DIR")
+	local rvim_cache_dir = os.getenv("PVIM_CACHE_DIR")
 	if not rvim_cache_dir then
 		return vim.fn.stdpath("cache")
 	end

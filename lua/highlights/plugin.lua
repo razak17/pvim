@@ -2,6 +2,7 @@ local P = require("highlights.palette")
 
 return {
 	Normal = { fg = P.fg, bg = P.bg },
+	NormalFloat = { fg = P.fg, bg = P.bg },
 	NormalNC = { fg = P.fg, bg = P.none },
 	Terminal = { fg = P.fg, bg = P.bg },
 	SignColumn = { fg = P.fg, bg = P.bg },
