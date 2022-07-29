@@ -8,8 +8,12 @@ end
 require("globals")
 require("bootstrap")
 require("settings")
+local status_ok, _ = pcall(vim.cmd, "colorscheme zephyr")
+if not status_ok then
+  -- vim.notify("colorscheme " .. colorscheme .. " not found!")
+  return
+end
 require("keymaps")
-require("highlights")
 require("plugins")
 require("plugins.telescope")
 require("plugins.whichkey")
