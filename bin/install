@@ -34,6 +34,8 @@ cloneconfig() {
 	fi
 
 	sudo cp --force "$PVIM_CONFIG_DIR/bin/pvim" "$HOME/.local/bin"
+
+  echo "Run PackerInstall on first startup to install plugins"
 }
 
 removeconfig () {
