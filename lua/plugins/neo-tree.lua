@@ -10,7 +10,6 @@ require("which-key").register({
 })
 
 require("neo-tree").setup({
-	source_selector = { winbar = true, separator_active = " " },
 	enable_git_status = true,
 	git_status_async = true,
 	filesystem = {
