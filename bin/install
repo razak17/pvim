@@ -1,0 +1,58 @@
+#!/bin/sh
+
+PV_BRANCH="${PV_BRANCH:-"main"}"
+PV_REMOTE="${PV_REMOTE:-razak17/pvim.git}"
+PVIM_CONFIG_DIR="${PVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/pvim"}"
+
+moveoldpvim() {
+	echo "pVim not installed"
+	echo "Please remove '$PVIM_CONFIG_DIR' path before installing" && exit
+}
+
+importPvim() {
+  echo "Cloning pVim configuration"
+  if ! git clone --branch "$PV_BRANCH" \
+    --depth 1 "https://github.com/${PV_REMOTE}" "$PVIM_CONFIG_DIR"; then
+    echo "Failed to clone repository. Installation failed." && exit
+  fi
+}
+
+installpacker() {
+  git clone https://github.com/wbthomason/packer.nvim "$HOME/.local/share/nvim/site/pack/packer/opt/packer.nvim"
+}
+
+cloneconfig() {
+	[ -d "$PVIM_CONFIG_DIR" ] && moveoldpvim
+
+	echo "Installing pvim"
+	importPvim
+
+	if [ -e "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
+		echo 'packer already installed'
+	else
+		installpacker
+	fi
+
+	sudo cp --force "$PVIM_CONFIG_DIR/bin/pvim" "$HOME/.local/bin"
+}
+
+removeconfig () {
+  rm -r "$PVIM_CONFIG_DIR/bin/pvim"
+  rm "$HOME/.local/bin/pvim"
+	echo "pVim uninstalled"
+}
+
+while [ "$#" -gt 0 ]; do
+	curr=$1
+	shift
+
+	case "$curr" in
+	*--all*)
+		cloneconfig
+		;;
+	*--uninstall*)
+		cloneconfig
+		;;
+	*) echo "Unavailable command... $curr" ;;
+	esac
+done
