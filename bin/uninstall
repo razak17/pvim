@@ -6,6 +6,7 @@ removeconfig () {
   rm -r "$PVIM_CONFIG_DIR/bin/pvim"
   rm "$HOME/.local/bin/pvim"
 	echo "pVim uninstalled"
+  cd "$HOME" || exit
 }
 
 removeconfig
