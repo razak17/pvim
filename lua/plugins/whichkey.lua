@@ -31,6 +31,7 @@ which_key.register({
 		B = {
 			name = "+Background",
 			a = { ":ls<CR>", "show all open buffers" },
+      -- TODO: Make this better
 			d = {
 				":highlight MsgArea guibg=#1e2127 guifg=default<CR>:highlight StatusLine guibg=#1e2127 guifg=default<CR>:highlight Normal guibg=#1e2127 guifg=default<CR>:highlight SignColumn guibg=#1e2127<CR>:highlight LineNr guifg=#5B6268<CR>",
 				"dark",

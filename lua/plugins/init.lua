@@ -33,7 +33,9 @@ end
 packer.init({
 	display = {
 		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
+			return require("packer.util").float({
+				border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" },
+			})
 		end,
 	},
 })
@@ -47,8 +49,12 @@ return packer.startup(function(use)
 	use("folke/which-key.nvim")
 	use("razak17/zephyr-nvim")
 	use("xiyaowong/accelerated-jk.nvim")
-
-	-- Telescope
+	use({
+		"romainl/vim-cool",
+		config = function()
+			vim.g.CoolTotalMatches = 1
+		end,
+	})
 	use("nvim-telescope/telescope.nvim")
 
 	-- Automatically set up your configuration after cloning packer.nvim
