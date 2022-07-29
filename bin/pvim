@@ -1,5 +1,5 @@
 #!/bin/sh
 
-PVIM_CONFIG_DIR="${PVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/pvim-test"}"
+PVIM_CONFIG_DIR="${PVIM_CONFIG_DIR:-"$XDG_CONFIG_HOME/pvim"}"
 
 exec nvim -u "$PVIM_CONFIG_DIR/init.lua" "$@"
