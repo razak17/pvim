@@ -48,7 +48,6 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
 	use("folke/which-key.nvim")
 	use("razak17/zephyr-nvim")
-	use("xiyaowong/accelerated-jk.nvim")
 	use("nvim-telescope/telescope.nvim")
 	use({ "nvim-neo-tree/neo-tree.nvim", branch = "v2.x" })
 	use("MunifTanjim/nui.nvim")
