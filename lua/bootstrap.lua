@@ -1,10 +1,3 @@
-function join_paths(...)
-	local uv = vim.loop
-	local path_sep = uv.os_uname().version:match("Windows") and "\\" or "/"
-	local result = table.concat({ ... }, path_sep)
-	return result
-end
-
 if os.getenv("PVIM_RUNTIME_DIR") then
 	vim.opt.rtp:remove(join_paths(vim.fn.stdpath("data"), "site"))
 	vim.opt.rtp:remove(join_paths(vim.fn.stdpath("data"), "site", "after"))
