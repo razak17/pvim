@@ -49,6 +49,7 @@ return function()
 			p = {
 				name = "Packer",
 				c = { "<cmd>PackerCompile<cr>", "compile" },
+				C = { "<cmd>PackerClean<cr>", "clean" },
 				i = { "<cmd>PackerInstall<cr>", "install" },
 				s = { "<cmd>PackerSync<cr>", "sync" },
 				S = { "<cmd>PackerStatus<cr>", "status" },

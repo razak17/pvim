@@ -1,6 +1,6 @@
 local fn = vim.fn
 local fmt = string.format
-local use_local = require('utils').use_local
+local use_local = require("utils").use_local
 
 ---Require a plugin config
 ---@param name string
@@ -54,10 +54,10 @@ return packer.startup(function(use)
 	-- My plugins here
 	use("wbthomason/packer.nvim")
 	use("nvim-lua/popup.nvim")
-  use({ "nvim-telescope/telescope.nvim", config = conf("telescope") })
+	use({ "nvim-telescope/telescope.nvim", config = conf("telescope") })
 	use("nvim-lua/plenary.nvim")
 	use({ "folke/which-key.nvim", config = conf("whichkey") })
-  use_local({"razak17/zephyr-nvim", local_path = 'personal'})
+	use_local({ "razak17/zephyr-nvim", local_path = "personal" })
 	use({ "nvim-neo-tree/neo-tree.nvim", branch = "v2.x", config = conf("neo-tree") })
 	use("MunifTanjim/nui.nvim")
 	use({
@@ -84,17 +84,15 @@ return packer.startup(function(use)
 	})
 	use({
 		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		module = "cmp",
 		config = conf("cmp"),
 		requires = {
-			{ "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
-			{ "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp" },
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
 			{ "f3fora/cmp-spell", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-emoji", after = "nvim-cmp" },
-			{ "dmitmel/cmp-cmdline-history", after = "nvim-cmp" },
 			{
 				"petertriho/cmp-git",
 				after = "nvim-cmp",
