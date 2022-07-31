@@ -5,8 +5,8 @@ return function()
 	if not cmp_status_ok then
 		return
 	end
-	local style = require("style")
-	local kind_icons = style.icons.kind
+	local icons = require("style").icons
+	local kind_icons = icons.kind
 
 	---A terser proxy for `nvim_replace_termcodes`
 	---@param str string
