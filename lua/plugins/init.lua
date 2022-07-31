@@ -153,5 +153,13 @@ return packer.startup(function(use)
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then require('packer').sync() end
-  vim.cmd.source(packer_compiled)
+
+  if not vim.g.packer_compiled_loaded and vim.loop.fs_stat(packer_compiled) then
+    vim.cmd.source(packer_compiled)
+    vim.g.packer_compiled_loaded = true
+  end
+
+  if vim.fn.filereadable(packer_compiled) ~= 1 then
+    require('packer').compile()
+  end
 end)
