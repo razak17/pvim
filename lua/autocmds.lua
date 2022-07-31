@@ -1,7 +1,5 @@
 if not pvim then return end
 
-local api, fn = vim.api, vim.fn
-
 pvim.augroup('TextYankHighlight', {
   {
     -- don't execute silently in case of errors
@@ -33,9 +31,7 @@ pvim.augroup('WinBehavior', {
   {
     event = { 'FocusLost' },
     pattern = { '*' },
-    command = function()
-      vim.cmd('silent! wall')
-    end,
+    command = function() vim.cmd('silent! wall') end,
   },
   { event = { 'TermOpen' }, pattern = { '*:zsh' }, command = 'startinsert' },
   -- Automatically jump into the quickfix window on open
