@@ -53,12 +53,9 @@ keymap("n", "<Right>", ":silent bn<CR> :redraw!<CR>", { noremap = true })
 
 keymap("n", "<F5>", ":set relativenumber! number! nocursorline ruler!<CR>", { noremap = false })
 
-keymap("n", "H", "<Plug>(CybuPrev)", { noremap = false })
-keymap("n", "L", "<Plug>(CybuNext)", { noremap = false })
-
 -- Navigate buffers
--- keymap("n", "<S-h>", ":bprevious<CR>", opts)
--- keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<S-l>", ":bnext<CR>", opts)
 
 vim.cmd([[
 cnoreabbrev W! w!

@@ -96,19 +96,6 @@ return packer.startup(function(use)
 		end,
 	})
 
-	use({
-		"ghillb/cybu.nvim",
-		config = function()
-			require("cybu").setup({
-				position = {
-					relative_to = "win",
-					anchor = "topright",
-				},
-				style = { border = "single", hide_buffer_id = true },
-			})
-		end,
-	})
-
 	-- Snippet
 	use("L3MON4D3/LuaSnip") --snippet engine
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
