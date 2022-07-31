@@ -1,4 +1,12 @@
 local fn = vim.fn
+local fmt = string.format
+
+---Require a plugin config
+---@param name string
+---@return any
+local function conf(name)
+	return require(fmt("plugins.%s", name))
+end
 
 -- Automatically install packer
 local install_path = pvim.get_runtime_dir() .. "/site/pack/packer/start/packer.nvim"
@@ -46,10 +54,10 @@ return packer.startup(function(use)
 	use("wbthomason/packer.nvim") -- Have packer manage itself
 	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
-	use("folke/which-key.nvim")
+	use({ "folke/which-key.nvim", config = conf("whichkey") })
 	use("razak17/zephyr-nvim")
-	use("nvim-telescope/telescope.nvim")
-	use({ "nvim-neo-tree/neo-tree.nvim", branch = "v2.x" })
+	use({ "nvim-telescope/telescope.nvim", config = conf("telescope") })
+	use({ "nvim-neo-tree/neo-tree.nvim", branch = "v2.x", config = conf("neo-tree") })
 	use("MunifTanjim/nui.nvim")
 	use({
 		"s1n7ax/nvim-window-picker",
@@ -73,33 +81,57 @@ return packer.startup(function(use)
 			vim.g.CoolTotalMatches = 1
 		end,
 	})
-	use("hrsh7th/nvim-cmp")
-	use("hrsh7th/cmp-buffer") -- buffer completions
-	use("hrsh7th/cmp-path") -- path completions
-	use("f3fora/cmp-spell")
-	use("hrsh7th/cmp-emoji")
 	use({
-		"uga-rosa/cmp-dictionary",
-		config = function()
-			-- Refer to install script
-			local dicwords = join_paths(pvim.get_runtime_dir(), "site", "dictionary.txt")
-			if vim.fn.filereadable(dicwords) ~= 1 then
-				dicwords = "/usr/share/dict/words"
-			end
-			require("cmp_dictionary").setup({
-				async = true,
-				dic = {
-					["*"] = dicwords,
-				},
-			})
-			require("cmp_dictionary").update()
-		end,
+		"hrsh7th/nvim-cmp",
+		config = conf("cmp"),
+		requires = {
+			{ "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
+			{ "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp" },
+			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+			{ "f3fora/cmp-spell", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-emoji", after = "nvim-cmp" },
+			{ "dmitmel/cmp-cmdline-history", after = "nvim-cmp" },
+			{
+				"petertriho/cmp-git",
+				after = "nvim-cmp",
+				config = function()
+					require("cmp_git").setup({
+						filetypes = { "gitcommit", "NeogitCommitMessage" },
+					})
+				end,
+			},
+			{
+				"uga-rosa/cmp-dictionary",
+				after = "nvim-cmp",
+				config = function()
+					-- Refer to install script
+					local dicwords = join_paths(pvim.get_runtime_dir(), "site", "dictionary.txt")
+					if vim.fn.filereadable(dicwords) ~= 1 then
+						dicwords = "/usr/share/dict/words"
+					end
+					require("cmp_dictionary").setup({
+						async = true,
+						dic = {
+							["*"] = dicwords,
+						},
+					})
+					require("cmp_dictionary").update()
+				end,
+			},
+		},
 	})
 
-	-- Snippet
-	use("L3MON4D3/LuaSnip") --snippet engine
-	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
-  use "kyazdani42/nvim-web-devicons"
+	use("kyazdani42/nvim-web-devicons")
+	use({
+		"L3MON4D3/LuaSnip",
+		event = "InsertEnter",
+		module = "luasnip",
+		requires = "rafamadriz/friendly-snippets",
+		config = conf("luasnip"),
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
