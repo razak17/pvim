@@ -90,7 +90,6 @@ return packer.startup(function(use)
 		requires = {
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
 			{ "f3fora/cmp-spell", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-emoji", after = "nvim-cmp" },
 			{
@@ -130,6 +129,33 @@ return packer.startup(function(use)
 		module = "luasnip",
 		requires = "rafamadriz/friendly-snippets",
 		config = conf("luasnip"),
+	})
+	use({
+		"numToStr/FTerm.nvim",
+		event = { "BufWinEnter" },
+		config = function()
+			local fterm = require("FTerm")
+			fterm.setup({ dimensions = { height = 0.9, width = 0.9 } })
+			local function new_float(cmd)
+				cmd = fterm:new({ cmd = cmd, dimensions = { height = 0.9, width = 0.9 } }):toggle()
+			end
+			local nnoremap = pvim.nnoremap
+			nnoremap([[<c-\>]], function()
+				fterm.toggle()
+			end, "fterm: toggle lazygit")
+			pvim.tnoremap([[<c-\>]], function()
+				fterm.toggle()
+			end, "fterm: toggle lazygit")
+			nnoremap("<leader>lg", function()
+				new_float("lazygit")
+			end, "fterm: toggle lazygit")
+			nnoremap("<leader>gc", function()
+				new_float("git add . && git commit -v -a")
+			end, "git: commit")
+			nnoremap("<leader>gd", function()
+				new_float("iconf -ccma")
+			end, "git: commit dotfiles")
+		end,
 	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
