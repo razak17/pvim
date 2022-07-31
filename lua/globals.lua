@@ -1,4 +1,34 @@
+if not pvim then return end
+
+local api, fn = vim.api, vim.fn
 local fmt = string.format
+
+--- Convert a list or map of items into a value by iterating all it's fields and transforming
+--- them with a callback
+---@generic T : table
+---@param callback fun(T, T, key: string | number): T
+---@param list T[]
+---@param accum T
+---@return T
+function pvim.fold(callback, list, accum)
+  for k, v in pairs(list) do
+    accum = callback(accum, v, k)
+    assert(accum ~= nil, 'The accumulator must be returned on each iteration')
+  end
+  return accum
+end
+
+---Determine if a value of any type is empty
+---@param item any
+---@return boolean?
+function pvim.empty(item)
+  if not item then return true end
+  local item_type = type(item)
+  if item_type == 'string' then return item == '' end
+  if item_type == 'number' then return item <= 0 end
+  if item_type == 'table' then return vim.tbl_isempty(item) end
+  return item ~= nil
+end
 
 function join_paths(...)
 	local uv = vim.loop
