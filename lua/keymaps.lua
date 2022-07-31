@@ -56,3 +56,13 @@ keymap("n", "<Left>", ":silent bp<CR> :redraw!<CR>", { noremap = true })
 keymap("n", "<Right>", ":silent bn<CR> :redraw!<CR>", { noremap = true })
 
 keymap("n", "<F5>", ":set relativenumber! number! nocursorline ruler!<CR>", { noremap = false })
+
+vim.cmd([[
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Wq wq
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+]])
