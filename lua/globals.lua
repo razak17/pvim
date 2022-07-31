@@ -3,6 +3,20 @@ if not pvim then return end
 local api, fn = vim.api, vim.fn
 local fmt = string.format
 
+---Require a module using [pcall] and report any errors
+---@param module string
+---@param opts table?
+---@return boolean, any
+function pvim.safe_require(module, opts)
+  opts = opts or { silent = false }
+  local ok, result = pcall(require, module)
+  if not ok and not opts.silent then
+    if opts.message then result = opts.message .. '\n' .. result end
+    vim.notify(result, vim.log.levels.ERROR, { title = fmt('Error requiring: %s', module) })
+  end
+  return ok, result
+end
+
 --- Convert a list or map of items into a value by iterating all it's fields and transforming
 --- them with a callback
 ---@generic T : table
