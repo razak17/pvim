@@ -73,30 +73,46 @@ return packer.startup(function(use)
 			vim.g.CoolTotalMatches = 1
 		end,
 	})
-  use "hrsh7th/nvim-cmp"
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "f3fora/cmp-spell"
-  use "hrsh7th/cmp-emoji"
-use({
-  'uga-rosa/cmp-dictionary',
-      config = function()
-        -- Refer to install script
-        local dicwords = join_paths(pvim.get_runtime_dir(), 'site', 'dictionary.txt')
-        if vim.fn.filereadable(dicwords) ~= 1 then dicwords = '/usr/share/dict/words' end
-        require('cmp_dictionary').setup({
-          async = true,
-          dic = {
-            ['*'] = dicwords,
-          },
-        })
-        require('cmp_dictionary').update()
-      end,
-})
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/cmp-buffer") -- buffer completions
+	use("hrsh7th/cmp-path") -- path completions
+	use("f3fora/cmp-spell")
+	use("hrsh7th/cmp-emoji")
+	use({
+		"uga-rosa/cmp-dictionary",
+		config = function()
+			-- Refer to install script
+			local dicwords = join_paths(pvim.get_runtime_dir(), "site", "dictionary.txt")
+			if vim.fn.filereadable(dicwords) ~= 1 then
+				dicwords = "/usr/share/dict/words"
+			end
+			require("cmp_dictionary").setup({
+				async = true,
+				dic = {
+					["*"] = dicwords,
+				},
+			})
+			require("cmp_dictionary").update()
+		end,
+	})
 
-  -- Snippet
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+	use({
+		"ghillb/cybu.nvim",
+		config = function()
+			require("cybu").setup({
+				position = {
+					relative_to = "win",
+					anchor = "topright",
+				},
+				style = { border = "single", hide_buffer_id = true },
+			})
+		end,
+	})
+
+	-- Snippet
+	use("L3MON4D3/LuaSnip") --snippet engine
+	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+  use "kyazdani42/nvim-web-devicons"
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
