@@ -1,5 +1,6 @@
 local fn = vim.fn
 local fmt = string.format
+local use_local = require('utils').use_local
 
 ---Require a plugin config
 ---@param name string
@@ -51,12 +52,12 @@ packer.init({
 -- Install your plugins here
 return packer.startup(function(use)
 	-- My plugins here
-	use("wbthomason/packer.nvim") -- Have packer manage itself
-	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
-	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
+	use("wbthomason/packer.nvim")
+	use("nvim-lua/popup.nvim")
+  use({ "nvim-telescope/telescope.nvim", config = conf("telescope") })
+	use("nvim-lua/plenary.nvim")
 	use({ "folke/which-key.nvim", config = conf("whichkey") })
-	use("razak17/zephyr-nvim")
-	use({ "nvim-telescope/telescope.nvim", config = conf("telescope") })
+  use_local({"razak17/zephyr-nvim", local_path = 'personal'})
 	use({ "nvim-neo-tree/neo-tree.nvim", branch = "v2.x", config = conf("neo-tree") })
 	use("MunifTanjim/nui.nvim")
 	use({

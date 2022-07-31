@@ -15,7 +15,25 @@ return function()
 		return api.nvim_replace_termcodes(str, true, true, true)
 	end
 
-	local t = replace_termcodes
+	local border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }
+
+	local cmp_window = {
+		border = border,
+		winhighlight = table.concat({
+			"Normal:NormalFloat",
+			"FloatBorder:FloatBorder",
+			"CursorLine:Visual",
+			completion = {
+				-- TODO: consider 'shadow', and tweak the winhighlight
+				border = border,
+			},
+			documentation = {
+				border = border,
+			},
+			"Search:None",
+		}, ","),
+	}
+
 	local function tab(fallback)
 		local ok, luasnip = pvim.safe_require("luasnip", { silent = true })
 		if cmp.visible() then
@@ -41,13 +59,12 @@ return function()
 		end
 		fallback()
 	end
-	local border = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }
 	cmp.setup({
 		experimental = { ghost_text = false },
 		preselect = cmp.PreselectMode.None,
 		window = {
-			completion = cmp.config.window.bordered({ border = border }),
-			documentation = cmp.config.window.bordered({ border = border }),
+			completion = cmp.config.window.bordered(cmp_window),
+			documentation = cmp.config.window.bordered(cmp_window),
 		},
 		snippet = {
 			expand = function(args)
@@ -56,7 +73,7 @@ return function()
 		},
 		mapping = {
 			["<c-h>"] = cmp.mapping(function()
-				api.nvim_feedkeys(fn["copilot#Accept"](t("<Tab>")), "n", true)
+				api.nvim_feedkeys(fn["copilot#Accept"](replace_termcodes("<Tab>")), "n", true)
 			end),
 			["<C-k>"] = cmp.mapping.select_prev_item(),
 			["<C-j>"] = cmp.mapping.select_next_item(),
