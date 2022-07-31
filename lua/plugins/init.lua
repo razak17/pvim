@@ -26,8 +26,11 @@ end
 local status_ok, packer = pcall(require, 'packer')
 if not status_ok then return end
 
+local packer_compiled = join_paths(pvim.get_runtime_dir(), 'site', 'lua', '_compiled_nightly.lua')
+
 -- Have packer use a popup window
 packer.init({
+  compile_path = packer_compiled,
   display = {
     open_fn = function()
       return require('packer.util').float({
@@ -150,4 +153,5 @@ return packer.startup(function(use)
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then require('packer').sync() end
+  vim.cmd.source(packer_compiled)
 end)
