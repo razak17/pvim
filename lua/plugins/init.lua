@@ -138,6 +138,7 @@ return packer.startup(function(use)
       nnoremap('<leader>gd', function() new_float('iconf -ccma') end, 'git: commit dotfiles')
     end,
   })
+  use({ 'moll/vim-bbye', event = 'BufWinEnter' })
   use({
     'xiyaowong/accelerated-jk.nvim',
     event = { 'BufWinEnter' },
