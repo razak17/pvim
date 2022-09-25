@@ -52,22 +52,6 @@ return packer.startup(function(use)
   use({ 'nvim-neo-tree/neo-tree.nvim', branch = 'v2.x', config = conf('neo-tree') })
   use('MunifTanjim/nui.nvim')
   use({
-    's1n7ax/nvim-window-picker',
-    tag = 'v1.*',
-    config = function()
-      require('window-picker').setup({
-        autoselect_one = true,
-        include_current = false,
-        filter_rules = {
-          bo = {
-            filetype = { 'neo-tree-popup', 'quickfix', 'incline' },
-            buftype = { 'terminal', 'quickfix', 'nofile' },
-          },
-        },
-      })
-    end,
-  })
-  use({
     'romainl/vim-cool',
     config = function() vim.g.CoolTotalMatches = 1 end,
   })
