@@ -134,7 +134,17 @@ return packer.startup(function(use)
       })
     end,
   })
-
+  use({
+    'uga-rosa/ccc.nvim',
+    config = function()
+      require('ccc').setup({
+        highlighter = {
+          auto_enable = true,
+          excludes = { 'dart' },
+        },
+      })
+    end,
+  })
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then require('packer').sync() end
@@ -144,7 +154,5 @@ return packer.startup(function(use)
     vim.g.packer_compiled_loaded = true
   end
 
-  if vim.fn.filereadable(packer_compiled) ~= 1 then
-    require('packer').compile()
-  end
+  if vim.fn.filereadable(packer_compiled) ~= 1 then require('packer').compile() end
 end)
