@@ -48,7 +48,7 @@ return packer.startup(function(use)
   use({ 'nvim-telescope/telescope.nvim', config = conf('telescope') })
   use('nvim-lua/plenary.nvim')
   use({ 'folke/which-key.nvim', config = conf('whichkey') })
-  use_local({ 'razak17/zephyr-nvim', local_path = 'personal' })
+  use({ 'razak17/zephyr-nvim', commit = '6009f7' })
   use({ 'nvim-neo-tree/neo-tree.nvim', branch = 'v2.x', config = conf('neo-tree') })
   use('MunifTanjim/nui.nvim')
   use({
@@ -145,6 +145,7 @@ return packer.startup(function(use)
       })
     end,
   })
+  use({ 'gpanders/nvim-parinfer' })
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then require('packer').sync() end
