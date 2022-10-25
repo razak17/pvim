@@ -40,7 +40,7 @@ return function()
           'light',
         },
       },
-      c = { '<cmd>Bdelete!<CR>', 'close buffer' },
+      c = { "<cmd>lua require('close_buffers').wipe({ type = 'this' })<CR>", 'close buffer' },
       h = { '<cmd>nohlsearch<CR>', 'no highlight' },
       W = { '<cmd>set wrap! linebreak<CR>', 'toggle wrap' },
       x = { '<cmd>q!<CR>', 'quit' },
