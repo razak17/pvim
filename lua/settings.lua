@@ -257,6 +257,7 @@ opt.spellsuggest:prepend({ 12 })
 opt.spelloptions = 'camel'
 opt.spellcapcheck = '' -- don't check for capital letters at start of sentence
 opt.fileformats = { 'unix', 'mac', 'dos' }
+opt.spelllang = 'en'
 opt.spelllang:append('programming')
 opt.spellfile = join_paths(pvim.get_config_dir(), 'spell', 'en.utf-8.add')
 -----------------------------------------------------------------------------//
