@@ -189,20 +189,50 @@ return function()
     }))
   end
 
+  local function delta_opts(opts, is_buf)
+    local delta = previewers.new_termopen_previewer({
+      get_command = function(entry)
+        local args = {
+          'git',
+          '-c',
+          'core.pager=delta',
+          '-c',
+          'delta.side-by-side=false',
+          'diff',
+          entry.value .. '^!',
+        }
+        if is_buf then vim.list_extend(args, { '--', entry.current_file }) end
+        return args
+      end,
+    })
+    opts = opts or {}
+    opts.previewer = {
+      delta,
+      previewers.git_commit_message.new(opts),
+    }
+    return opts
+  end
+
+  local function delta_git_commits(opts) builtin.git_commits(delta_opts(opts)) end
+
+  local function delta_git_bcommits(opts) builtin.git_bcommits(delta_opts(opts, true)) end
+
   require('which-key').register({
     ['<c-p>'] = { find_files, 'telescope: find files' },
     b = { buffers, 'buffers' },
     ['<leader>f'] = {
       name = '+Telescope',
+      g = {
+        name = 'Git',
+        b = { builtin.git_branches, 'branch' },
+        B = { delta_git_bcommits, 'buffer commits' },
+        c = { delta_git_commits, 'commits' },
+        f = { builtin.git_files, 'files' },
+        o = { builtin.git_status, 'open changed file' },
+        s = { builtin.git_status, 'status' },
+      },
       s = { builtin.live_grep, 'find word' },
       w = { builtin.grep_string, 'find current word' },
-    },
-    s = {
-      name = 'Search',
-      o = { builtin.oldfiles, 'old files' },
-      r = { builtin.registers, 'registers' },
-      k = { builtin.keymaps, 'keymaps' },
-      c = { builtin.commands, 'commands' },
     },
   })
 end
