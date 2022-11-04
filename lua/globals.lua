@@ -66,7 +66,7 @@ end
 ---@return string
 function pvim.get_config_dir()
   local pvim_config_dir = vim.env.PVIM_CONFIG_DIR
-  if not pvim_config_dir then return '~/.config/pvim' end
+  if not pvim_config_dir then return vim.call('stdpath', 'config') end
   return pvim_config_dir
 end
 
