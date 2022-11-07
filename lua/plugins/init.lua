@@ -145,6 +145,10 @@ return packer.startup(function(use)
       })
     end,
   })
+use({
+  'karb94/neoscroll.nvim', -- NOTE: alternative: 'declancm/cinnamon.nvim'
+  config = function() require('neoscroll').setup({ hide_cursor = true }) end,
+})
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then require('packer').sync() end
