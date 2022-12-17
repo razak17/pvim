@@ -219,9 +219,9 @@ return function()
 
   require('which-key').register({
     ['<c-p>'] = { find_files, 'telescope: find files' },
-    b = { buffers, 'buffers' },
     ['<leader>f'] = {
       name = '+Telescope',
+      b = { buffers, 'buffers' },
       g = {
         name = 'Git',
         b = { builtin.git_branches, 'branch' },
