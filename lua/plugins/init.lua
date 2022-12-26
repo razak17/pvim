@@ -152,5 +152,5 @@ require('lazy').setup({
         'close others'
       )
     end,
-  }
+  },
 }, lazy_opts)
