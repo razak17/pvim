@@ -23,4 +23,50 @@ require('settings')
 require('keymaps')
 require('autocmds')
 require('plugins')
-require('highlights')
+vim.cmd('colorscheme zephyr')
+----------------------------------------------------------------------------------------------------
+-- Append RTP
+----------------------------------------------------------------------------------------------------
+vim.opt.rtp:remove(join_paths(vim.fn.stdpath('data'), 'site'))
+vim.opt.rtp:remove(join_paths(vim.fn.stdpath('data'), 'site', 'after'))
+vim.opt.rtp:prepend(join_paths(pvim.get_runtime_dir(), 'site'))
+vim.opt.rtp:append(join_paths(pvim.get_runtime_dir(), 'site', 'after'))
+
+vim.opt.rtp:remove(vim.fn.stdpath('config'))
+vim.opt.rtp:remove(join_paths(vim.fn.stdpath('config'), 'after'))
+vim.opt.rtp:prepend(pvim.get_config_dir())
+vim.opt.rtp:append(join_paths(pvim.get_config_dir(), 'after'))
+
+vim.cmd([[let &packpath = &runtimepath]])
+
+----------------------------------------------------------------------------------------------------
+-- Highlights
+----------------------------------------------------------------------------------------------------
+local fmt = string.format
+
+local function hex_to_rgb(color)
+  local hex = color:gsub('#', '')
+  return tonumber(hex:sub(1, 2), 16), tonumber(hex:sub(3, 4), 16), tonumber(hex:sub(5), 16)
+end
+
+local function alter(attribute, percent) return math.floor(attribute * (100 + percent) / 100) end
+
+local function alter_color(color, percent)
+  local r, g, b = hex_to_rgb(color)
+  if not r or not g or not b then return 'NONE' end
+  r, g, b = alter(r, percent), alter(g, percent), alter(b, percent)
+  r, g, b = math.min(r, 255), math.min(g, 255), math.min(b, 255)
+  return fmt('#%02x%02x%02x', r, g, b)
+end
+
+local function get_hl(group_name)
+  local ok, hl = pcall(vim.api.nvim_get_hl_by_name, group_name, true)
+  if not ok then return {} end
+  hl.foreground = hl.foreground and '#' .. bit.tohex(hl.foreground, 6)
+  hl.background = hl.background and '#' .. bit.tohex(hl.background, 6)
+  return hl
+end
+
+local normal_bg = get_hl('Normal', 'background').background
+vim.api.nvim_set_hl(0, 'Normal', { bg = alter_color(normal_bg, -50) })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = alter_color(normal_bg, -50) })

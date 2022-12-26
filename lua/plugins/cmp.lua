@@ -1,8 +1,7 @@
 return function()
   local fn, api = vim.fn, vim.api
 
-  local cmp_status_ok, cmp = pcall(require, 'cmp')
-  if not cmp_status_ok then return end
+  local cmp = require('cmp')
   local icons = require('style').icons
   local kind_icons = icons.kind
 

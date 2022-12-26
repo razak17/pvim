@@ -44,15 +44,6 @@ return function()
       h = { '<cmd>nohlsearch<CR>', 'no highlight' },
       W = { '<cmd>set wrap! linebreak<CR>', 'toggle wrap' },
       x = { '<cmd>q!<CR>', 'quit' },
-      p = {
-        name = 'Packer',
-        c = { '<cmd>PackerCompile<cr>', 'compile' },
-        C = { '<cmd>PackerClean<cr>', 'clean' },
-        i = { '<cmd>PackerInstall<cr>', 'install' },
-        s = { '<cmd>PackerSync<cr>', 'sync' },
-        S = { '<cmd>PackerStatus<cr>', 'status' },
-        u = { '<cmd>PackerUpdate<cr>', 'update' },
-      },
       S = { '<cmd>set spell! spelllang=en_us<CR><CR>', 'toggle spell' },
     },
   })

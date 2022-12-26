@@ -17,25 +17,13 @@ importPvim() {
   fi
 }
 
-installpacker() {
-  git clone https://github.com/wbthomason/packer.nvim "$HOME/.local/share/nvim/site/pack/packer/opt/packer.nvim"
-}
-
 cloneconfig() {
 	[ -d "$PVIM_CONFIG_DIR" ] && moveoldpvim
 
 	echo "Installing pvim"
 	importPvim
 
-	if [ -e "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
-		echo 'packer already installed'
-	else
-		installpacker
-	fi
-
 	sudo cp --force "$PVIM_CONFIG_DIR/bin/pvim" "$HOME/.local/bin"
-
-  echo "Note: Run PackerInstall on first startup to install plugins"
 }
 
 while [ "$#" -gt 0 ]; do
