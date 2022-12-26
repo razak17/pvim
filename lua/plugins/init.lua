@@ -43,7 +43,7 @@ require('lazy').setup({
   'kyazdani42/nvim-web-devicons',
   { 'nvim-telescope/telescope.nvim', lazy = false, config = conf('telescope') },
   { 'folke/which-key.nvim', lazy = false, config = conf('whichkey') },
-  { 'razak17/zephyr-nvim', commit = '6009f7' },
+  { 'razak17/zephyr-nvim' },
   { 'nvim-neo-tree/neo-tree.nvim', lazy = false, branch = 'v2.x', config = conf('neo-tree') },
   {
     'romainl/vim-cool',
@@ -133,4 +133,24 @@ require('lazy').setup({
     event = 'VeryLazy',
     config = function() require('neoscroll').setup({ hide_cursor = true }) end,
   },
+  {
+    'kazhala/close-buffers.nvim',
+    init = function()
+      pvim.nnoremap(
+        '<leader>c',
+        function() require('close_buffers').delete({ type = 'this' }) end,
+        'close buffer'
+      )
+      pvim.nnoremap(
+        '<leader>bc',
+        function() require('close_buffers').wipe({ type = 'other' }) end,
+        'close others'
+      )
+      pvim.nnoremap(
+        '<leader>bx',
+        function() require('close_buffers').wipe({ type = 'all', force = true }) end,
+        'close others'
+      )
+    end,
+  }
 }, lazy_opts)
