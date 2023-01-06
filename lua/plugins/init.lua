@@ -55,10 +55,9 @@ require('lazy').setup({
     event = 'InsertEnter',
     config = conf('cmp'),
     dependencies = {
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'f3fora/cmp-spell' },
-      { 'hrsh7th/cmp-emoji' },
+      'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-emoji',
       {
         'petertriho/cmp-git',
         config = function()

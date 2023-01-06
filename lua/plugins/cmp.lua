@@ -89,21 +89,18 @@ return function()
         path = '(Path)',
         buffer = '(Buf)',
         dictionary = '(Dict)',
-        spell = '(SP)',
-        calc = '(Calc)',
-        emoji = '(E)',
+        emoji = '(Emj)',
       },
       format = function(entry, vim_item)
         vim_item.kind = kind_icons[vim_item.kind]
         if entry.source.name == 'emoji' then vim_item.kind = icons.misc.Smiley end
         -- NOTE: order matters
         vim_item.menu = ({
-          nvim_lsp = '',
-          nvim_lua = '',
-          luasnip = '',
-          buffer = '',
-          path = '',
-          emoji = '',
+          nvim_lsp = '(Lsp)',
+          luasnip = '(Snip)',
+          buffer = '(Buf)',
+          path = '(Path)',
+          emoji = '(Emj)',
         })[entry.source.name]
         return vim_item
       end,
@@ -124,12 +121,7 @@ return function()
           end,
         },
       },
-      {
-        name = 'dictionary',
-        keyword_length = 3,
-      },
-      { name = 'spell' },
-      { name = 'calc' },
+      { name = 'dictionary', keyword_length = 3 },
       { name = 'emoji' },
     },
   })

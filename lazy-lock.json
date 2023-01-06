@@ -8,7 +8,6 @@
   "cmp-dictionary": { "branch": "main", "commit": "b7c0629e10c8a3a10311aa4ad952d207509d5e67" },
   "cmp-emoji": { "branch": "main", "commit": "19075c36d5820253d32e2478b6aaf3734aeaafa0" },
   "cmp-git": { "branch": "main", "commit": "fae6cdb407ad6c63a0b1928670bad1a67a55b887" },
-  "cmp-spell": { "branch": "master", "commit": "60584cb75e5e8bba5a0c9e4c3ab0791e0698bffa" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
   "friendly-snippets": { "branch": "main", "commit": "1a6a02350568d6830bcfa167c72f9b6e75e454ae" },
   "lazy.nvim": { "branch": "main", "commit": "5697098e9763c204cfc75506d3fbbd187bc5d672" },

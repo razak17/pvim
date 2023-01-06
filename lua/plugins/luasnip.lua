@@ -65,8 +65,6 @@ return function()
   local user_snippets = join_paths(pvim.get_config_dir(), 'snippets', 'textmate')
   if is_directory(user_snippets) then paths[#paths + 1] = user_snippets end
   require('luasnip.loaders.from_lua').lazy_load()
-  require('luasnip.loaders.from_vscode').lazy_load({
-    paths = paths,
-  })
+  require('luasnip.loaders.from_vscode').lazy_load({ paths = paths })
   require('luasnip.loaders.from_snipmate').lazy_load()
 end
