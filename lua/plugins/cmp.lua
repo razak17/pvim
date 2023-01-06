@@ -84,13 +84,6 @@ return function()
     formatting = {
       deprecated = true,
       fields = { 'kind', 'abbr', 'menu' },
-      source_names = {
-        luasnip = '(SN)',
-        path = '(Path)',
-        buffer = '(Buf)',
-        dictionary = '(Dict)',
-        emoji = '(Emj)',
-      },
       format = function(entry, vim_item)
         vim_item.kind = kind_icons[vim_item.kind]
         if entry.source.name == 'emoji' then vim_item.kind = icons.misc.Smiley end
