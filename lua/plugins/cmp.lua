@@ -94,6 +94,8 @@ return function()
           buffer = '(Buf)',
           path = '(Path)',
           emoji = '(Emj)',
+          spell = '(Sp)',
+          dictionary = '(Dict)',
         })[entry.source.name]
         return vim_item
       end,
