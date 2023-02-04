@@ -16,7 +16,7 @@ if not vim.loop.fs_stat(lazy_path) then
     lazy_path,
   })
 end
-vim.opt.runtimepath:prepend(lazy_path)
+vim.opt.rtp:prepend(lazy_path)
 
 local lazy_opts = {
   root = join_paths(pvim.get_runtime_dir(), 'site/lazy'),

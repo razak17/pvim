@@ -1,6 +1,4 @@
-return function()
-  local ls = require('luasnip')
-  local types = require('luasnip.util.types')
+return function() local ls = require('luasnip') local types = require('luasnip.util.types')
   local extras = require('luasnip.extras')
   local fmt = require('luasnip.extras.fmt').fmt
 

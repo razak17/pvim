@@ -9,6 +9,7 @@
   "cmp-emoji": { "branch": "main", "commit": "19075c36d5820253d32e2478b6aaf3734aeaafa0" },
   "cmp-git": { "branch": "main", "commit": "fae6cdb407ad6c63a0b1928670bad1a67a55b887" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
+  "cybu.nvim": { "branch": "main", "commit": "395791b1e1177e3459c85415970ab8216b19a5dc" },
   "friendly-snippets": { "branch": "main", "commit": "1a6a02350568d6830bcfa167c72f9b6e75e454ae" },
   "lazy.nvim": { "branch": "main", "commit": "5697098e9763c204cfc75506d3fbbd187bc5d672" },
   "neo-tree.nvim": { "branch": "v2.x", "commit": "73a90f6a736b51168ed05d89ed8872f75b98471c" },
