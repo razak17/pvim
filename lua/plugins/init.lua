@@ -32,7 +32,9 @@ local lazy_opts = {
   performance = {
     enabled = true,
     cache = { path = join_paths(pvim.get_cache_dir(), 'lazy/cache') },
+    rtp = { reset = false },
   },
+
   readme = { root = join_paths(pvim.get_cache_dir(), 'lazy/readme') },
 }
 
