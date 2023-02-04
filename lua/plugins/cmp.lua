@@ -2,7 +2,7 @@ return function()
   local fn, api = vim.fn, vim.api
 
   local cmp = require('cmp')
-  local icons = require('style').icons
+  local icons = require('styles').icons
   local kind_icons = icons.kind
 
   ---A terser proxy for `nvim_replace_termcodes`
