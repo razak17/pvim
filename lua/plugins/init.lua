@@ -154,4 +154,9 @@ require('lazy').setup({
       )
     end,
   },
+  {
+    'echasnovski/mini.pairs',
+    event = 'VeryLazy',
+    config = function() require('mini.pairs').setup() end,
+  },
 }, lazy_opts)
