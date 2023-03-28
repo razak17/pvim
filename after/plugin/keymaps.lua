@@ -1,21 +1,8 @@
-local nnoremap = pvim.nnoremap
-local xnoremap = pvim.xnoremap
-local vnoremap = pvim.vnoremap
-local inoremap = pvim.inoremap
-local opts = { noremap = true, silent = true }
+local nnoremap = function(...) map('n', ...) end
+local xnoremap = function(...) map('x', ...) end
+local vnoremap = function(...) map('v', ...) end
+local inoremap = function(...) map('i', ...) end
 
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
---Remap space as leader key
-keymap('', '<Space>', '<Nop>', opts)
-
-keymap('n', '<F5>', ':set relativenumber! number! nocursorline ruler!<CR>', opts)
-keymap('n', '<C-q>', ':q<CR>', { noremap = false })
-keymap('n', '<Left>', ':silent bp<CR> :redraw!<CR>', { noremap = true })
-keymap('n', '<Right>', ':silent bn<CR> :redraw!<CR>', { noremap = true })
-
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
 ----------------------------------------------------------------------------------------------------
 -- Window Movement
 ----------------------------------------------------------------------------------------------------
@@ -62,8 +49,8 @@ nnoremap('<C-s>', ':silent! write<CR>')
 nnoremap('<CR>', 'o<Esc>')
 nnoremap('<S-Enter>', 'O<Esc>')
 -- Navigate buffers
-nnoremap('H', '<cmd>bprevious<CR>', 'previous buffer')
-nnoremap('L', '<cmd>bnext<CR>', 'next buffer')
+nnoremap('H', '<cmd>bprevious<CR>', { desc = 'previous buffer' })
+nnoremap('L', '<cmd>bnext<CR>', { desc = 'next buffer' })
 
 vim.cmd([[
 cnoreabbrev W! w!

@@ -1,106 +1,65 @@
-local fmt = string.format
+local fn = vim.fn
 
----Require a plugin config
----@param name string
----@return any
-local function conf(name) return require(fmt('plugins.%s', name)) end
-
-local data = vim.fn.stdpath('data')
-local lazy_path = join_paths(data, 'lazy', 'lazy.nvim')
-if not vim.loop.fs_stat(lazy_path) then
-  vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    '--single-branch',
-    'https://github.com/folke/lazy.nvim.git',
-    lazy_path,
-  })
-end
-vim.opt.rtp:prepend(lazy_path)
-
-local lazy_opts = {
-  defaults = { lazy = true },
-  git = { timeout = 720 },
-  dev = {
-    path = join_paths(vim.env.HOME, 'personal/workspace/coding/plugins'),
-    patterns = { 'razak17' },
-  },
-  install = { colorscheme = { 'onedark', 'habamax' } },
-  ui = { border = 'single' },
-  performance = {
-    enabled = true,
-  },
-}
-
-require('lazy').setup({
+return {
   'nvim-lua/popup.nvim',
   'nvim-lua/plenary.nvim',
   'MunifTanjim/nui.nvim',
   'kyazdani42/nvim-web-devicons',
-  { 'nvim-telescope/telescope.nvim', lazy = false, config = conf('telescope') },
-  { 'folke/which-key.nvim', lazy = false, config = conf('whichkey') },
-  { 'razak17/onedark.nvim' },
-  { 'nvim-neo-tree/neo-tree.nvim', lazy = false, branch = 'v2.x', config = conf('neo-tree') },
+
+  { 'razak17/onedark.nvim', lazy = false, priority = 1000 },
   {
     'romainl/vim-cool',
     event = { 'BufRead', 'BufNewFile' },
     config = function() vim.g.CoolTotalMatches = 1 end,
   },
   {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    config = conf('cmp'),
-    dependencies = {
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-emoji',
-      {
-        'petertriho/cmp-git',
-        config = function()
-          require('cmp_git').setup({
-            filetypes = { 'gitcommit', 'NeogitCommitMessage' },
-          })
-        end,
-      },
-      {
-        'uga-rosa/cmp-dictionary',
-        config = function()
-          require('cmp_dictionary').setup({
-            async = true,
-            dic = {
-              ['*'] = join_paths(vim.call('stdpath', 'data'), 'site', 'spell', 'dictionary.txt'),
-            },
-          })
-        end,
-      },
-    },
-  },
-  {
-    'L3MON4D3/LuaSnip',
-    event = 'InsertEnter',
-    dependencies = { 'rafamadriz/friendly-snippets' },
-    config = conf('luasnip'),
-  },
-  {
-    'numToStr/FTerm.nvim',
+    'akinsho/toggleterm.nvim',
     event = 'VeryLazy',
-    config = function()
-      local fterm = require('FTerm')
-      fterm.setup({ dimensions = { height = 0.9, width = 0.9 } })
-      local function new_float(cmd)
-        cmd = fterm:new({ cmd = cmd, dimensions = { height = 0.9, width = 0.9 } }):toggle()
+    opts = {
+      open_mapping = [[<c-\>]],
+      shade_filetypes = { 'none' },
+      direction = 'float',
+      autochdir = true,
+      persist_mode = true,
+      insert_mappings = false,
+      start_in_insert = true,
+      highlights = {
+        FloatBorder = { link = 'FloatBorder' },
+        NormalFloat = { link = 'NormalFloat' },
+      },
+      float_opts = {
+        winblend = 3,
+        border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
+      },
+      size = function(term)
+        if term.direction == 'horizontal' then return 15 end
+        if term.direction == 'vertical' then return math.floor(vim.o.columns * 0.4) end
+      end,
+    },
+    config = function(_, opts)
+      require('toggleterm').setup(opts)
+
+      local float_handler = function(term)
+        vim.wo.sidescrolloff = 0
+        if not pvim.falsy(fn.mapcheck('jk', 't')) then
+          vim.keymap.del('t', 'jk', { buffer = term.bufnr })
+          vim.keymap.del('t', '<esc>', { buffer = term.bufnr })
+        end
       end
-      local nnoremap = pvim.nnoremap
-      nnoremap([[<c-\>]], function() fterm.toggle() end, 'fterm: toggle lazygit')
-      pvim.tnoremap([[<c-\>]], function() fterm.toggle() end, 'fterm: toggle lazygit')
-      nnoremap('<leader>lg', function() new_float('lazygit') end, 'fterm: toggle lazygit')
-      nnoremap(
-        '<leader>gc',
-        function() new_float('git add . && git commit -v -a') end,
-        'git: commit'
-      )
-      nnoremap('<leader>gd', function() new_float('iconf -ccma') end, 'git: commit dotfiles')
+
+      local Terminal = require('toggleterm.terminal').Terminal
+
+      local lazygit = Terminal:new({
+        cmd = 'lazygit',
+        dir = 'git_dir',
+        hidden = true,
+        direction = 'float',
+        on_open = float_handler,
+      })
+
+      map('n', '<leader>lg', function() lazygit:toggle() end, {
+        desc = 'toggleterm: toggle lazygit',
+      })
     end,
   },
   {
@@ -131,27 +90,27 @@ require('lazy').setup({
   },
   {
     'kazhala/close-buffers.nvim',
-    init = function()
-      pvim.nnoremap(
+    keys = {
+      {
         '<leader>c',
         function() require('close_buffers').delete({ type = 'this' }) end,
-        'close buffer'
-      )
-      pvim.nnoremap(
+        desc = 'close buffer',
+      },
+      {
         '<leader>bc',
         function() require('close_buffers').wipe({ type = 'other' }) end,
-        'close others'
-      )
-      pvim.nnoremap(
+        desc = 'close others',
+      },
+      {
         '<leader>bx',
         function() require('close_buffers').wipe({ type = 'all', force = true }) end,
-        'close others'
-      )
-    end,
+        desc = 'close all',
+      },
+    },
   },
   {
     'echasnovski/mini.pairs',
     event = 'VeryLazy',
     config = function() require('mini.pairs').setup() end,
   },
-}, lazy_opts)
+}

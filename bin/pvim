@@ -1,7 +1,3 @@
 #!/bin/sh
 
-export PVIM_RUNTIME_DIR="${PVIM_RUNTIME_DIR:-$HOME/.local/share/pvim}"
-export PVIM_CONFIG_DIR="${PVIM_CONFIG_DIR:-$HOME/.config/pvim}"
-export PVIM_CACHE_DIR="${PVIM_CACHE_DIR:-$HOME/.cache/pvim}"
-
-exec nvim -u "$PVIM_CONFIG_DIR/init.lua" "$@"
+NVIM_APPNAME=pvim nvim "$@"
