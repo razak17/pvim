@@ -142,7 +142,7 @@ return {
         require('cmp_dictionary').setup({
           async = true,
           dic = {
-            ['*'] = join_paths(pvim.get_runtime_dir(), 'site', 'spell', 'dictionary.txt'),
+            ['*'] = join_paths(vim.call('stdpath', 'data'), 'site', 'spell', 'dictionary.txt'),
           },
         })
       end,
