@@ -5,7 +5,8 @@ local fmt = string.format
 ---@return any
 local function conf(name) return require(fmt('plugins.%s', name)) end
 
-local lazy_path = join_paths(pvim.get_runtime_dir(), 'site/lazy/lazy.nvim')
+local data = vim.fn.stdpath('data')
+local lazy_path = join_paths(data, 'lazy', 'lazy.nvim')
 if not vim.loop.fs_stat(lazy_path) then
   vim.fn.system({
     'git',
@@ -19,9 +20,7 @@ end
 vim.opt.rtp:prepend(lazy_path)
 
 local lazy_opts = {
-  root = join_paths(pvim.get_runtime_dir(), 'site/lazy'),
   defaults = { lazy = true },
-  lockfile = join_paths(pvim.get_config_dir(), 'lazy-lock.json'),
   git = { timeout = 720 },
   dev = {
     path = join_paths(vim.env.HOME, 'personal/workspace/coding/plugins'),
@@ -31,11 +30,7 @@ local lazy_opts = {
   ui = { border = 'single' },
   performance = {
     enabled = true,
-    cache = { path = join_paths(pvim.get_cache_dir(), 'lazy/cache') },
-    rtp = { reset = false },
   },
-
-  readme = { root = join_paths(pvim.get_cache_dir(), 'lazy/readme') },
 }
 
 require('lazy').setup({
@@ -74,7 +69,7 @@ require('lazy').setup({
           require('cmp_dictionary').setup({
             async = true,
             dic = {
-              ['*'] = join_paths(pvim.get_runtime_dir(), 'site', 'spell', 'dictionary.txt'),
+              ['*'] = join_paths(vim.call('stdpath', 'data'), 'site', 'spell', 'dictionary.txt'),
             },
           })
         end,

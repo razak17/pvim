@@ -51,33 +51,6 @@ function join_paths(...)
   return result
 end
 
----Get the full path to `$pvim_RUNTIME_DIR`
----@return string
-function pvim.get_runtime_dir()
-  local pvim_runtime_dir = os.getenv('PVIM_RUNTIME_DIR')
-  if not pvim_runtime_dir then
-    -- when nvim is used directly
-    return vim.fn.stdpath('data')
-  end
-  return pvim_runtime_dir
-end
-
----Get the full path to `$pvim_CONFIG_DIR`
----@return string
-function pvim.get_config_dir()
-  local pvim_config_dir = vim.env.PVIM_CONFIG_DIR
-  if not pvim_config_dir then return vim.call('stdpath', 'config') end
-  return pvim_config_dir
-end
-
----Get the full path to `$pvim_CACHE_DIR`
----@return string
-function pvim.get_cache_dir()
-  local pvim_cache_dir = os.getenv('PVIM_CACHE_DIR')
-  if not pvim_cache_dir then return vim.fn.stdpath('cache') end
-  return pvim_cache_dir
-end
-
 --- Validate the keys passed to pvim.augroup are valid
 ---@param name string
 ---@param cmd Autocommand

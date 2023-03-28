@@ -58,9 +58,9 @@ return function() local ls = require('luasnip') local types = require('luasnip.u
   require('luasnip').config.setup({ store_selection_keys = '<C-x>' })
 
   local paths = {
-    join_paths(pvim.get_runtime_dir(), 'site', 'lazy', 'friendly-snippets'),
+    join_paths(vim.call('stdpath', 'data'), 'site', 'lazy', 'friendly-snippets'),
   }
-  local user_snippets = join_paths(pvim.get_config_dir(), 'snippets', 'textmate')
+  local user_snippets = join_paths(vim.call('stdpath', 'config'), 'snippets', 'textmate')
   if is_directory(user_snippets) then paths[#paths + 1] = user_snippets end
   require('luasnip.loaders.from_lua').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({ paths = paths })

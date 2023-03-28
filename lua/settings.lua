@@ -2,9 +2,8 @@ local o, opt, fn = vim.o, vim.opt, vim.fn
 ----------------------------------------------------------------------------------------------------
 -- Neovim Directories {{{1
 ----------------------------------------------------------------------------------------------------
-o.udir = pvim.get_cache_dir() .. '/undodir'
-o.directory = pvim.get_cache_dir() .. '/swap'
-o.viewdir = pvim.get_cache_dir() .. '/view'
+o.udir = vim.call('stdpath', 'cache') .. '/undodir'
+o.viewdir = vim.call('stdpath', 'cache') .. '/view'
 -----------------------------------------------------------------------------//
 -- Message output on vim actions {{{1
 -----------------------------------------------------------------------------//
@@ -228,7 +227,7 @@ opt.sessionoptions = {
 -- What to save for views and sessions:
 opt.viewoptions = { 'cursor', 'folds' } -- save/restore just these (with `:{mk,load}view`)
 opt.virtualedit = 'block' -- allow cursor to move where there is no text in visual block mode
--- opt.shadafile = join_paths(rvim.get_cache_dir(), 'shada', 'rvim.shada')
+-- opt.shadafile = join_paths(vim.call('stdpath', 'cache'), 'shada', 'rvim.shada')
 -----------------------------------------------------------------------------//
 -- Jumplist
 -----------------------------------------------------------------------------//
@@ -263,7 +262,7 @@ opt.spelloptions = 'camel'
 opt.spellcapcheck = '' -- don't check for capital letters at start of sentence
 opt.fileformats = { 'unix', 'mac', 'dos' }
 -- opt.spelllang:append('programming')
-opt.spellfile = join_paths(pvim.get_config_dir(), 'spell', 'en.utf-8.add')
+opt.spellfile = join_paths(vim.call('stdpath', 'config'), 'spell', 'en.utf-8.add')
 -----------------------------------------------------------------------------//
 -- Mouse {{{1
 -----------------------------------------------------------------------------//
