@@ -29,7 +29,7 @@ require('plugins')
 ----------------------------------------------------------------------------------------------------
 -- Color Scheme
 ----------------------------------------------------------------------------------------------------
-local status_ok, colorscheme = pcall(vim.cmd, 'colorscheme zephyr')
+local status_ok, colorscheme = pcall(vim.cmd, 'colorscheme onedark')
 if not status_ok then
   vim.notify('colorscheme ' .. colorscheme .. ' not found!')
   return

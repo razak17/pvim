@@ -27,7 +27,7 @@ local lazy_opts = {
     path = join_paths(vim.env.HOME, 'personal/workspace/coding/plugins'),
     patterns = { 'razak17' },
   },
-  install = { colorscheme = { 'zephyr', 'habamax' } },
+  install = { colorscheme = { 'onedark', 'habamax' } },
   ui = { border = 'single' },
   performance = {
     enabled = true,
@@ -45,7 +45,7 @@ require('lazy').setup({
   'kyazdani42/nvim-web-devicons',
   { 'nvim-telescope/telescope.nvim', lazy = false, config = conf('telescope') },
   { 'folke/which-key.nvim', lazy = false, config = conf('whichkey') },
-  { 'razak17/zephyr-nvim' },
+  { 'razak17/onedark.nvim' },
   { 'nvim-neo-tree/neo-tree.nvim', lazy = false, branch = 'v2.x', config = conf('neo-tree') },
   {
     'romainl/vim-cool',
