@@ -19,13 +19,6 @@ return {
         A = {
           name = 'ASCII',
           A = { ':normal 20i<<CR>', 'add 20 less than signs' },
-          b = { ':.!toilet -w 200 -f term -F border<CR>', 'term' },
-          B = { ':.!toilet -w 200 -f bfraktur<CR>', 'bfraktur' },
-          e = { ':.!toilet -w 200 -f emboss<CR>', 'emboss' },
-          E = { ':.!toilet -w 200 -f emboss2<CR>', 'emboss2' },
-          f = { ':.!toilet -w 200 -f bigascii12<CR>', 'bigascii12' },
-          F = { ':.!toilet -w 200 -f letter<CR>', 'letter' },
-          m = { ':.!toilet -w 200 -f bigmono12<CR>', 'bigmono12' },
           v = { ':!asciidoc-view %<CR><CR>', 'asciidoc-view' },
           w = { ':.!toilet -w 200 -f wideterm<CR>', 'wideterm' },
         },

@@ -139,4 +139,17 @@ pvim.augroup('Utilities', {
     vim.opt_local.formatoptions:remove('r')
     vim.opt_local.formatoptions:remove('o')
   end,
+}, {
+  event = { 'BufRead', 'BufNewFile' },
+  pattern = { '*.sld' },
+  command = function()
+    map('n', '<localleader>aa', '<Cmd>SlideAscii term<CR>', { desc = 'slides: ascii term', buffer = 0 })
+    map('n', '<localleader>aA', '<Cmd>SlideAscii bigascii12<CR>', { desc = 'slides: ascii bigascii12', buffer = 0 })
+    map('n', '<localleader>ab', '<Cmd>SlideAscii bfraktur<CR>', { desc = 'slides: ascii bfraktur', buffer = 0 })
+    map('n', '<localleader>ae', '<Cmd>SlideAscii emboss<CR>', { desc = 'slides: ascii emboss', buffer = 0 })
+    map('n', '<localleader>aE', '<Cmd>SlideAscii emboss2<CR>', { desc = 'slides: ascii emboss2', buffer = 0 })
+    map('n', '<localleader>al', '<Cmd>SlideAscii letter<CR>', { desc = 'slides: ascii letter', buffer = 0 })
+    map('n', '<localleader>am', '<Cmd>SlideAscii bigmono12<CR>', { desc = 'slides: ascii bigmono12', buffer = 0 })
+    map('n', '<localleader>aw', '<Cmd>SlideAscii wideterm<CR>', { desc = 'slides: ascii wideterm', buffer = 0 })
+  end,
 })

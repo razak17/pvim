@@ -7,6 +7,7 @@ return {
   'kyazdani42/nvim-web-devicons',
 
   { 'razak17/onedark.nvim', lazy = false, priority = 1000 },
+  { 'razak17/slides.nvim', lazy = false },
   {
     'romainl/vim-cool',
     event = { 'BufRead', 'BufNewFile' },
