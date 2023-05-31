@@ -49,8 +49,8 @@ nnoremap('<C-s>', ':silent! write<CR>')
 nnoremap('<CR>', 'o<Esc>')
 nnoremap('<S-Enter>', 'O<Esc>')
 -- Navigate buffers
-nnoremap('H', '<cmd>bprevious<CR>', { desc = 'previous buffer' })
-nnoremap('L', '<cmd>bnext<CR>', { desc = 'next buffer' })
+nnoremap('<leader>bp', '<cmd>bprevious<CR>', { desc = 'previous buffer' })
+nnoremap('<leader>bn', '<cmd>bnext<CR>', { desc = 'next buffer' })
 
 vim.cmd([[
 cnoreabbrev W! w!
